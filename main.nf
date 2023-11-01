@@ -1,14 +1,19 @@
 #!/usr/bin/env nextflow
-nextflow.enable.dsl=2 
+nextflow.enable.dsl=2
 
 process sayHello {
-  input: 
+  input:
     val x
   output:
     stdout
   script:
     """
-    echo '$x world!'
+    if [ "$x" == "Hello" ]; then
+      echo "Throwing an exception for 'Hello'"
+      exit 1
+    else
+      echo '$x world!'
+    fi
     """
 }
 
